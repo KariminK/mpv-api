@@ -4,9 +4,9 @@ import express, { RequestHandler } from "express";
 const app = express();
 const port = 3000;
 
-const playVideo: RequestHandler = (req, res) => {
+const playVideo: RequestHandler<{ videoId: string }> = (req, res) => {
   const { videoId } = req.params;
-  exec(`mpv https://youtu.be/${videoId}`, (err, stdout) => {
+  exec(`mpv https://youtu.be/${videoId}`, (err) => {
     if (err) {
       res.status(500).send(err);
     } else {
